@@ -4,7 +4,7 @@ on: [push, workflow_dispatch]
 
 env:
   RESOURCE-GROUP: rg-eshoponweb
-  LOCATION: West US 2
+  LOCATION: "West US 2"
   TEMPLATE-FILE: infra/webapp.bicep
   SUBSCRIPTION-ID: 03cb1524-1367-4ccc-a4e5-fa1d9a24dbc5
   WEBAPP-NAME: eshoponweb-webapp62173614
@@ -74,7 +74,9 @@ jobs:
           subscriptionId: ${{ env.SUBSCRIPTION-ID }}
           resourceGroupName: ${{ env.RESOURCE-GROUP }}
           template: bicep-template/webapp.bicep
-          parameters: "webAppName=${{ env.WEBAPP-NAME }} location=${{ env.LOCATION }}"
+          parameters: >
+            webAppName="${{ env.WEBAPP-NAME }}"
+            location="${{ env.LOCATION }}"
           failOnStdErr: false
 
       - name: Publish Website to WebApp
